@@ -110,7 +110,7 @@ public class Personnel implements Serializable {
 			}
 		}
 	
-	public static Personnel deserialize(String path) throws ClassNotFoundException {
+	public static Personnel deserialize(String path) {
 		
 		ObjectInputStream reader = null;
 		Personnel p =null;
@@ -122,6 +122,8 @@ public class Personnel implements Serializable {
 		}catch(IOException e) {
 			System.err.println( "echec deserialization  /" + path );
 			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
 		}
 		
 		try {
