@@ -15,7 +15,7 @@ public class AffichageGroupe implements Iterable<InterfacePersonnel>, Serializab
 
 	public Iterator<InterfacePersonnel> iterator() {
 		// TODO Auto-generated method stub
-		return null;
+		return file.iterator();
 	}
 
 	private int idPersonnel;
@@ -72,27 +72,50 @@ public class AffichageGroupe implements Iterable<InterfacePersonnel>, Serializab
 			E.printStackTrace();
 		}
 	}
-	
+
 	public static AffichageGroupe deserialize(final String chemin) {
-        ObjectInputStream reader = null;
-        AffichageGroupe apg = null;
-        try {
-            FileInputStream fichier = new FileInputStream(chemin);
-            reader = new ObjectInputStream(fichier);
-            apg = (AffichageGroupe) reader.readObject();
-        } catch (IOException e) {
-        	System.err.println("La deserialization a echoue vers le fichier");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        try {
-            if (reader != null) {
-                reader.close();
-            }
-        } catch (IOException e2) {
-            e2.printStackTrace();
-        }
-        return apg;
-    }
+		ObjectInputStream reader = null;
+		AffichageGroupe apg = null;
+		try {
+			FileInputStream fichier = new FileInputStream(chemin);
+			reader = new ObjectInputStream(fichier);
+			apg = (AffichageGroupe) reader.readObject();
+		} catch (IOException e) {
+			System.err.println("La deserialization a echoue vers le fichier");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		try {
+			if (reader != null) {
+				reader.close();
+			}
+		} catch (IOException e2) {
+			e2.printStackTrace();
+		}
+		return apg;
+	}
+
+	public void parcoursGroupes(final InterfacePersonnel personnel) {
+		if (personnel.getClass() == GroupePersonnel.class) {
+			InterfacePersonnel p1, p2;
+			GroupePersonnel Ptmp;
+			file = new ArrayDeque<InterfacePersonnel>();
+			ArrayDeque<InterfacePersonnel> d = new ArrayDeque<InterfacePersonnel>();
+			d.add(personnel);
+			while (!d.isEmpty()) {
+				p1 = d.pollFirst();
+				file.add(p1);
+				if (p1.getClass() == GroupePersonnel.class) {
+					Ptmp = (GroupePersonnel) p1;
+					Iterator<InterfacePersonnel> ite = Ptmp.iterator();
+					while (ite.hasNext()) {
+						p2 = ite.next();
+						if (!d.contains(p2) && !file.contains(p2))
+							d.add(p2);
+					}
+				}
+			}
+		}
+	}
 
 }
