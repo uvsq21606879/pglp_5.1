@@ -1,6 +1,7 @@
 package uvsq.pglp_5_1.pglp_5_1;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.io.IOException;
 import java.io.FileInputStream;
@@ -24,7 +25,7 @@ public class GroupePersonnel implements Iterable<Personnel>, Serializable {
 	        idPersonnel = idGenerator++;
 	        Personnels = new ArrayList<Personnel>();
 	    }
-	 
+	 @Override
 	 public String toString() {
 	        String s = "IdPersonnel = " + idPersonnel + "\n";
 	        for (Personnel ip : Personnels) {
@@ -33,14 +34,17 @@ public class GroupePersonnel implements Iterable<Personnel>, Serializable {
 	        return s;
 	    }
 	 
-	 public GroupePersonnel ajouter(final Personnel ip) {
+	 @SuppressWarnings({ "unlikely-arg-type", "unchecked" })
+	public GroupePersonnel ajouter(final GroupePersonnel ip) {
 	        if (!Personnels.contains(ip)) {
-	            Personnels.add(ip);
+	        	
+	            Personnels.addAll((Collection<? extends Personnel>) ip);
 	        }
 	        return this;
 	    }
 	 
-	 public GroupePersonnel supprimer(final Personnel ip) {
+	 @SuppressWarnings("unlikely-arg-type")
+	public GroupePersonnel supprimer(GroupePersonnel ip) {
 	        System.out.println(Personnels.remove(ip));
 	        return this;
 	    }
