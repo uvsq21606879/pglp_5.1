@@ -10,14 +10,14 @@ public class GroupePersonnelTest {
 	@Test
 	public void GroupePersonnelTest() {
 		GroupePersonnel personnel = new GroupePersonnel();
-		Iterator<Personnel> ItPersonnel = personnel.iterator();
+		Iterator<InterfacePersonnel> ItPersonnel = personnel.iterator();
 		assertFalse(ItPersonnel.hasNext());
 	}
 	
 	public void ajouterTest() {
 		GroupePersonnel personnel = new GroupePersonnel();
 		personnel.ajouter(new GroupePersonnel());
-		Iterator<Personnel> ItPersonnel = personnel.iterator();
+		Iterator<InterfacePersonnel> ItPersonnel = personnel.iterator();
 		assertTrue(ItPersonnel.hasNext());
 	}
 	
@@ -37,11 +37,11 @@ public class GroupePersonnelTest {
 	public void testSuppression() {
 		GroupePersonnel personnel = new GroupePersonnel();
 		GroupePersonnel personnel2 = new GroupePersonnel();
-		GroupePersonnel iterator = personnel2;
+		InterfacePersonnel iterator = personnel2;
 		personnel.ajouter(personnel2);
 		personnel.supprimer(iterator);
-		Iterator<Personnel> ip = personnel.iterator();
-		assertFalse(ip.hasNext());
+		Iterator<InterfacePersonnel> IntrPersonnel = personnel.iterator();
+		assertFalse(IntrPersonnel.hasNext());
 	}
 	
 	 @Test

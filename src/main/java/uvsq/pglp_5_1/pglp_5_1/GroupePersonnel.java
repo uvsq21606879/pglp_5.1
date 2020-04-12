@@ -1,7 +1,6 @@
 package uvsq.pglp_5_1.pglp_5_1;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Iterator;
 import java.io.IOException;
 import java.io.FileInputStream;
@@ -12,39 +11,39 @@ import java.io.Serializable;
 
 
 
-public class GroupePersonnel implements Iterable<Personnel>, Serializable {
+public class GroupePersonnel implements Iterable<InterfacePersonnel>, Serializable, InterfacePersonnel {
 
 
 	private static final long serialVersionUID = -2268954669830584120L;
 	
 	private int idPersonnel;
 	private int idGenerator;
-	private ArrayList<Personnel> Personnels;
+	private ArrayList<InterfacePersonnel> Personnels;
 	  
 	 public GroupePersonnel() {
 	        idPersonnel = idGenerator++;
-	        Personnels = new ArrayList<Personnel>();
+	        Personnels = new ArrayList<InterfacePersonnel>();
 	    }
 	 @Override
 	 public String toString() {
 	        String s = "IdPersonnel = " + idPersonnel + "\n";
-	        for (Personnel ip : Personnels) {
+	        for (InterfacePersonnel ip : Personnels) {
 	            s += ip.toString();
 	        }
 	        return s;
 	    }
 	 
-	 @SuppressWarnings({ "unlikely-arg-type", "unchecked" })
-	public GroupePersonnel ajouter(final GroupePersonnel ip) {
+	
+	public GroupePersonnel ajouter(final InterfacePersonnel ip) {
 	        if (!Personnels.contains(ip)) {
 	        	
-	            Personnels.addAll((Collection<? extends Personnel>) ip);
+	            Personnels.add(ip);
 	        }
 	        return this;
 	    }
 	 
-	 @SuppressWarnings("unlikely-arg-type")
-	public GroupePersonnel supprimer(GroupePersonnel ip) {
+	 
+	public GroupePersonnel supprimer(InterfacePersonnel ip) {
 	        System.out.println(Personnels.remove(ip));
 	        return this;
 	    }
@@ -53,8 +52,8 @@ public class GroupePersonnel implements Iterable<Personnel>, Serializable {
 	        return idPersonnel;
 	    }
 	 
-	  public Iterator<Personnel> iterator() {
-		// TODO Auto-generated method stub
+	  public Iterator<InterfacePersonnel> iterator() {
+
 		return Personnels.iterator();
 	}
 	  

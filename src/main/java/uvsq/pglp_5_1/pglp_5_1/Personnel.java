@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 
-public class Personnel implements Serializable {
+public class Personnel implements Serializable, InterfacePersonnel {
 
 	private static final long serialVersionUID = -2080828874542305205L;
 	private int idPersonnel;
