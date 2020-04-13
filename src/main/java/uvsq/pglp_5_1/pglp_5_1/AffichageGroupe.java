@@ -35,6 +35,12 @@ public class AffichageGroupe implements Iterable<InterfacePersonnel>, Serializab
 	public void ajouter(final InterfacePersonnel IntrPersonnel) {
 		file.add(IntrPersonnel);
 	}
+	
+	public void reset() {
+        while (!file.isEmpty()) {
+            file.removeFirst();
+        }
+    }
 
 	@Override
 	public String toString() {
