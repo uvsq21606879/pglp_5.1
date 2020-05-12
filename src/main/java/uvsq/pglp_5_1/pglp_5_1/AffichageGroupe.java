@@ -15,54 +15,77 @@ import java.util.Iterator;
 
 public class AffichageGroupe implements Iterable<InterfacePersonnel>, Serializable {
 
-	 /**
-     * serial number éneré automatiquement.
-     */
+	/**
+	 * Le numero de serialization genere aleatoirement.
+	 */
 	private static final long serialVersionUID = -3373682237002368918L;
 
 	public Iterator<InterfacePersonnel> iterator() {
 		// TODO Auto-generated method stub
-		return file.iterator();
+		return listeIpersonnel.iterator();
 	}
-
-	private int idPersonnel;
-	private int idGenerator = 0;
-	ArrayDeque<InterfacePersonnel> file;
 	
 	 /**
-     * constructeur de la classe.
+     * identifiant du personnel.
      */
+	private int idPersonnel;
+	
+	/**
+     * afin de generer un id unique pour chaque personnel.
+     */
+	private int idGenerator = 0;
+
+	/**
+	 * liste a remplir contenant de Interfaces personnel.
+	 */
+	ArrayDeque<InterfacePersonnel> listeIpersonnel;
+
+	/**
+	 * constructeur de la classe.
+	 */
 
 	public AffichageGroupe() {
-		file = new ArrayDeque<InterfacePersonnel>();
+		listeIpersonnel = new ArrayDeque<InterfacePersonnel>();
 		idPersonnel = idGenerator = idGenerator + 1;
 
 	}
-	 /**
-     * Pour accéder à l'identifiant du Personnel.
-     * @return idPersonnel
-     */
+
+	/**
+	 * Pour acceder a l'identifiant du Personnel.
+	 * @return idPersonnel
+	 */
 
 	public int getIdPersonnel() {
 		return this.idPersonnel;
 	}
-
+	
+	/**
+	 * Ajouter un Personnel a la liste de Interface personnel.
+	 * @return Personnel a ajouter
+	 */
 	public void ajouter(final InterfacePersonnel IntrPersonnel) {
-		file.add(IntrPersonnel);
+		listeIpersonnel.add(IntrPersonnel);
 	}
 	
+	/**
+	 * Supprimer tout les elments de la liste.
+	 */
 	public void reset() {
-        while (!file.isEmpty()) {
-            file.removeFirst();
-        }
-    }
-
+		while (!listeIpersonnel.isEmpty()) {
+			listeIpersonnel.removeFirst();
+		}
+	}
+	
+	  /**
+     * Retourner tout le contenu de la listeIpesonnel sous forme d'une chaine de caracteres.
+     * @return le parcours de la listeIpersonnel en String.
+     */
 	@Override
 	public String toString() {
 		String personnel = "";
 		GroupePersonnel tmp;
 		// affichage du parcours
-		for (InterfacePersonnel c2 : file) {
+		for (InterfacePersonnel c2 : listeIpersonnel) {
 			if (c2.getClass().equals(GroupePersonnel.class)) {
 				tmp = (GroupePersonnel) c2;
 				personnel += tmp.getIdPersonnel() + "\n";
@@ -72,7 +95,12 @@ public class AffichageGroupe implements Iterable<InterfacePersonnel>, Serializab
 		}
 		return personnel;
 	}
-
+	
+	 /**
+     * serialization vers un fichier.
+     * @param nom ou chemin du fichier vers lequel serializer.
+     */
+	
 	public void serialize(final String chemin) {
 		ObjectOutputStream writer = null;
 		try {
@@ -120,18 +148,18 @@ public class AffichageGroupe implements Iterable<InterfacePersonnel>, Serializab
 		if (personnel.getClass() == GroupePersonnel.class) {
 			InterfacePersonnel p1, p2;
 			GroupePersonnel Ptmp;
-			file = new ArrayDeque<InterfacePersonnel>();
+			listeIpersonnel = new ArrayDeque<InterfacePersonnel>();
 			ArrayDeque<InterfacePersonnel> d = new ArrayDeque<InterfacePersonnel>();
 			d.add(personnel);
 			while (!d.isEmpty()) {
 				p1 = d.pollFirst();
-				file.add(p1);
+				listeIpersonnel.add(p1);
 				if (p1.getClass() == GroupePersonnel.class) {
 					Ptmp = (GroupePersonnel) p1;
 					Iterator<InterfacePersonnel> ite = Ptmp.iterator();
 					while (ite.hasNext()) {
 						p2 = ite.next();
-						if (!d.contains(p2) && !file.contains(p2))
+						if (!d.contains(p2) && !listeIpersonnel.contains(p2))
 							d.add(p2);
 					}
 				}
