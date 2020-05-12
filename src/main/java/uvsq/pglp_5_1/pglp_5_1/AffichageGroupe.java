@@ -9,8 +9,15 @@ import java.io.Serializable;
 import java.util.ArrayDeque;
 import java.util.Iterator;
 
+/**
+ * Affichage par groupe d'une InterfacePersonnel.
+ */
+
 public class AffichageGroupe implements Iterable<InterfacePersonnel>, Serializable {
 
+	 /**
+     * serial number éneré automatiquement.
+     */
 	private static final long serialVersionUID = -3373682237002368918L;
 
 	public Iterator<InterfacePersonnel> iterator() {
@@ -21,12 +28,20 @@ public class AffichageGroupe implements Iterable<InterfacePersonnel>, Serializab
 	private int idPersonnel;
 	private int idGenerator = 0;
 	ArrayDeque<InterfacePersonnel> file;
+	
+	 /**
+     * constructeur de la classe.
+     */
 
 	public AffichageGroupe() {
 		file = new ArrayDeque<InterfacePersonnel>();
 		idPersonnel = idGenerator = idGenerator + 1;
 
 	}
+	 /**
+     * Pour accéder à l'identifiant du Personnel.
+     * @return idPersonnel
+     */
 
 	public int getIdPersonnel() {
 		return this.idPersonnel;

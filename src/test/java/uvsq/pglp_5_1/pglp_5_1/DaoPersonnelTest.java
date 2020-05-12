@@ -2,7 +2,6 @@ package uvsq.pglp_5_1.pglp_5_1;
 
 import static org.junit.Assert.*;
 
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 
